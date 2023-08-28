@@ -172,8 +172,23 @@ x = 10 # binary value - 1010 (not showing leading 0s here for simplicity)
 - In python a *class* is also referred to as a *type* because it represents the data type of an object. We will use class and type interchangebly unless explicitly specified.
 - Don't get confused between type and `type`. We use type to refer to the class/type of an object and `type` is the variable that refers to the special object created by the PVM.
 
-#### Methods
-- A method is an object which contains a sequence of statements
+#### Special Attributes
+- Each object has some special attributes which have a naming convention that starts with double underscores and ends with double underscores - `__attribute_name__` .
+- Some set of these special attributes are common to all objects but some are available only in certain types of objects.
+- These attributes can refer to an object storing some information about the current object. For, example, the `__name__` attribute, which is present only in class-objects, refers to a string object containing name of the class/type.
+- Likewise, these attributes can also refer to an object containing some set of instructions which are executable.
+- In this section we will describe some of the common special attributes that are necessary for a python programmer to understand.
+  	- `__init__` : It is a special attribute that 
+-  It is to be noted that the `__init__` method defined earlier is also a special method that works as the constructor for the object. Whenever a new object for a class is created, the first method of the object that is called by default is `__init__` . It is used like a constructor to initialise some instance variables or do some other initialisation task.
+- There are several other special methods such as `__add__`, `__mul__`, `__str__` . These can be used to achieve operator overloading for the objects, like in C++.
+- We will discuss a special method `__call__` here which is necessary to understand the process of explicit object creation.
+	- This method corresponds to the operator `()` . 
+	- Suppose that we have a variable reference `xyz` to an object of type `type` (which in the simplest way can be obtained by defining a class `xyz` as in the previous example ), then if we write `xyz()`, it will call the method `__call__` of the object referred to by `xyz`. In simple terms `xyz()` is equivalent to `xyz.__call__()`.
+	- All the objects of the class/type `type` (i.e. all the **class objects**) have a default implementation of this method, which creates a new object of the class/type represented by this **class object** and returns a reference to it.
+	- All the objects of the class/type `function` (i.e. all the **function objects**) have a default implementation of this method which runs the associated function body.
+	- Any object which is not an instance of class `type` (i.e. an object which is not **class object**) or an instance of class `function` (i.e. an object which is not a function) do not have a default implementation of this method.
+	- So if we write `x = xyz()` and then do `x()` , we will get an error, because `x` is a reference to object of type `xyz` and not type `type` or `function`. 
+	- But, if we explicitly define a method `__call__` inside the class `xyz` then the above statement will call this method. It is not generally used in competitive coding and mostly is required for functional programming.
 
 #### Defining a custom *class-object* (or simply class)
 - The PVM reads the byte-code of the current file/script line by line.
@@ -226,20 +241,6 @@ print('PVM would have now created an instance of type 'type' in the memory')
 ```
 - Before going into details of explicitly creating an object of a given type/class we need to know about some special methods inside a class that are defined below.
 
-
-#### Special Methods
-- Every class can define some special methods that are used for some special operations. Some of these methods have some default implementation if we do not define them explicitly.
-- All special methods have the following naming convection, which starts with double underscores and ends with double underscores - `__method_name__` .
-- It is to be noted that the `__init__` method defined earlier is also a special method that works as the constructor for the object. Whenever a new object for a class is created, the first method of the object that is called by default is `__init__` . It is used like a constructor to initialise some instance variables or do some other initialisation task.
-- There are several other special methods such as `__add__`, `__mul__`, `__str__` . These can be used to achieve operator overloading for the objects, like in C++.
-- We will discuss a special method `__call__` here which is necessary to understand the process of explicit object creation.
-	- This method corresponds to the operator `()` . 
-	- Suppose that we have a variable reference `xyz` to an object of type `type` (which in the simplest way can be obtained by defining a class `xyz` as in the previous example ), then if we write `xyz()`, it will call the method `__call__` of the object referred to by `xyz`. In simple terms `xyz()` is equivalent to `xyz.__call__()`.
-	- All the objects of the class/type `type` (i.e. all the **class objects**) have a default implementation of this method, which creates a new object of the class/type represented by this **class object** and returns a reference to it.
-	- All the objects of the class/type `function` (i.e. all the **function objects**) have a default implementation of this method which runs the associated function body.
-	- Any object which is not an instance of class `type` (i.e. an object which is not **class object**) or an instance of class `function` (i.e. an object which is not a function) do not have a default implementation of this method.
-	- So if we write `x = xyz()` and then do `x()` , we will get an error, because `x` is a reference to object of type `xyz` and not type `type` or `function`. 
-	- But, if we explicitly define a method `__call__` inside the class `xyz` then the above statement will call this method. It is not generally used in competitive coding and mostly is required for functional programming.
 
 #### Explicitly creating an Object of a class/type
 - Let `xyz` be an object of class `type`. 
