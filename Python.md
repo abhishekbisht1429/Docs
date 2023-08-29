@@ -98,6 +98,7 @@ print(x.abc)
 - A literal in python can be thought of as a *label* that **cannot* be reassigned to any other object.
 - For example, `10` is a label that will always refer to an integer object with value 10.
 - Similarly, `"hello"` is a label that will always refer to a string object with value "hello".
+- Whenver any literal is used in a python program, the PVM creates the object corresponding to it automatically. We don't have to explicitly create it.
 - An example below will clarify the concept of constants:
 ```
                   a = 10
@@ -174,11 +175,12 @@ x = 10 # binary value - 1010 (not showing leading 0s here for simplicity)
 
 #### Special Attributes
 - Each object has some special attributes which have a naming convention that starts with double underscores and ends with double underscores - `__attribute_name__` .
-- Some set of these special attributes are common to all objects but some are available only in certain types of objects.
-- These attributes can refer to an object storing some information about the current object. For, example, the `__name__` attribute, which is present only in class-objects, refers to a string object containing name of the class/type.
-- Likewise, these attributes can also refer to an object containing some set of instructions which are executable.
-- In this section we will describe some of the common special attributes that are necessary for a python programmer to understand.
-  	- `__init__` : It is a special attribute that 
+- Some set of special attributes are common to all objects but some are available only in certain type of objects.
+- These attributes can refer to an object storing some information about the current object. For, example, the `__name__` attribute, which is present only in class-objects, is a string object containing name of the class/type.
+- Likewise, these attributes can also refer to an object containing set of instructions to be run.
+- In this section we will describe some of the common special-attributes that are necessary for a python programmer to understand.
+  	- `__init__` : It is a special attribute that refers to
+  	- 
 -  It is to be noted that the `__init__` method defined earlier is also a special method that works as the constructor for the object. Whenever a new object for a class is created, the first method of the object that is called by default is `__init__` . It is used like a constructor to initialise some instance variables or do some other initialisation task.
 - There are several other special methods such as `__add__`, `__mul__`, `__str__` . These can be used to achieve operator overloading for the objects, like in C++.
 - We will discuss a special method `__call__` here which is necessary to understand the process of explicit object creation.
@@ -250,7 +252,7 @@ print('PVM would have now created an instance of type 'type' in the memory')
 #### Function Objects
 - Functions in python are also represented by objects. 
 - Every function in python is an instance of a pre-defined class-object `function`
-- By
+- The
 - The PVM reads a file/script line by line and when it encounters a function defintion, it reads it and creates a corresponding object of type `function` and assigns its reference to a variable with same name as the function name. 
 - Example below illustrates this:
 ```
